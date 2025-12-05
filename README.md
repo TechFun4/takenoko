@@ -4,6 +4,8 @@
 
 A browser extension wallet for Solana that automatically rounds up your transactions and invests the difference in USDC and SOL, similar to Acorns for traditional finance.
 
+![](takenoko_transparent.png)
+
 ## Features
 
 - **Full Solana Wallet**: Send, receive, and manage SOL and SPL tokens
