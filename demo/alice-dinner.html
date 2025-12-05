@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pay Alice - Dinner Split</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .merchant-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .merchant-logo {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    .merchant-name {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    .merchant-tagline {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .invoice-card {
+      background: #f8f9fa;
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 25px;
+    }
+
+    .invoice-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .invoice-from {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .invoice-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .invoice-total {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 2px solid #ddd;
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .roundup-info {
+      background: #e8f5e9;
+      border: 2px solid #4caf50;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .roundup-text {
+      font-size: 14px;
+      color: #2e7d32;
+      margin-bottom: 5px;
+    }
+
+    .roundup-amount {
+      font-size: 18px;
+      font-weight: bold;
+      color: #1b5e20;
+    }
+
+    .pay-button {
+      width: 100%;
+      padding: 18px;
+      background: linear-gradient(135deg, #7C3AED 0%, #10B981 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-bottom: 15px;
+    }
+
+    .pay-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
+    }
+
+    .pay-button:active {
+      transform: translateY(0);
+    }
+
+    .powered-by {
+      text-align: center;
+      font-size: 12px;
+      color: #999;
+      margin-top: 20px;
+    }
+
+    .takenoko-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: linear-gradient(135deg, #7C3AED 0%, #10B981 100%);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    .success-message {
+      display: none;
+      background: #4caf50;
+      color: white;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      margin-bottom: 20px;
+      animation: slideIn 0.3s ease-out;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .demo-badge {
+      background: #ff9800;
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="demo-badge">🎬 DEMO MODE</div>
+
+    <div class="merchant-header">
+      <div class="merchant-logo">🍝</div>
+      <div class="merchant-name">Pasta Paradise</div>
+      <div class="merchant-tagline">Fine Italian Dining</div>
+    </div>
+
+    <div class="success-message" id="successMessage">
+      <div style="font-size: 32px; margin-bottom: 10px;">✅</div>
+      <div style="font-size: 18px; font-weight: bold; margin-bottom: 5px;">Payment Successful!</div>
+      <div style="font-size: 14px;">Round-up saved to your Takenoko wallet</div>
+    </div>
+
+    <div class="invoice-card">
+      <div class="invoice-title">
+        <span>📄</span>
+        <span>Split Bill Request</span>
+      </div>
+      <div class="invoice-from">
+        From: <strong>Alice</strong> 👩‍🦰<br/>
+        Date: December 5, 2025<br/>
+        Location: Pasta Paradise, NYC
+      </div>
+      <div class="invoice-item">
+        <span>Your Share (3 people)</span>
+        <span>$27.00</span>
+      </div>
+      <div class="invoice-item">
+        <span>Tax & Service</span>
+        <span>$2.67</span>
+      </div>
+      <div class="invoice-total">
+        <span>Total Due</span>
+        <span>$29.67</span>
+      </div>
+    </div>
+
+    <div class="roundup-info">
+      <div class="roundup-text">🎋 Takenoko Round-Up</div>
+      <div class="roundup-amount">+$0.33 to savings</div>
+      <div style="font-size: 12px; color: #558b2f; margin-top: 5px;">
+        Your payment will be rounded to $30.00
+      </div>
+    </div>
+
+    <button class="pay-button" id="payButton" onclick="processPayment()">
+      Pay $29.67 with Takenoko 🎋
+    </button>
+
+    <div class="powered-by">
+      Powered by
+      <div class="takenoko-badge">
+        <span>🎋</span>
+        <span>Takenoko</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function processPayment() {
+      const button = document.getElementById('payButton');
+      const successMessage = document.getElementById('successMessage');
+
+      // Disable button
+      button.disabled = true;
+      button.textContent = 'Processing...';
+
+      // Simulate payment processing
+      await new Promise(resolve => setTimeout(resolve, 1500));
+
+      // Check if Takenoko extension is installed
+      try {
+        // Try to communicate with extension
+        const paymentData = {
+          type: 'TAKENOKO_PAYMENT_REQUEST',
+          amount: 29.67,
+          recipient: 'Alice',
+          merchant: 'Pasta Paradise',
+          roundUp: 0.33,
+          total: 30.00,
+        };
+
+        // Post message to content script (if extension is installed)
+        window.postMessage(paymentData, '*');
+
+        // Show success
+        successMessage.classList.add('show');
+        button.textContent = '✅ Payment Sent!';
+        button.style.background = '#4caf50';
+
+        // Show alert with round-up info
+        setTimeout(() => {
+          alert(`🎋 Payment Complete!\n\n` +
+                `Paid to Alice: $29.67\n` +
+                `Round-up to Takenoko: $0.33\n\n` +
+                `Your savings are growing like bamboo shoots! 🎋\n\n` +
+                `Check your Takenoko wallet to see your updated round-up balance.`);
+        }, 500);
+
+        // Store the payment in localStorage for the extension to read
+        const payments = JSON.parse(localStorage.getItem('takenoko_demo_payments') || '[]');
+        payments.push({
+          timestamp: Date.now(),
+          amount: 29.67,
+          roundUp: 0.33,
+          merchant: 'Pasta Paradise',
+          recipient: 'Alice',
+        });
+        localStorage.setItem('takenoko_demo_payments', JSON.stringify(payments));
+
+      } catch (error) {
+        console.error('Payment error:', error);
+        button.textContent = 'Payment Failed';
+        button.style.background = '#f44336';
+
+        setTimeout(() => {
+          button.disabled = false;
+          button.textContent = 'Pay $29.67 with Takenoko 🎋';
+          button.style.background = 'linear-gradient(135deg, #7C3AED 0%, #10B981 100%)';
+        }, 2000);
+      }
+    }
+
+    // Listen for messages from extension
+    window.addEventListener('message', (event) => {
+      if (event.data.type === 'TAKENOKO_PAYMENT_CONFIRMED') {
+        console.log('Payment confirmed by Takenoko wallet:', event.data);
+      }
+    });
+  </script>
+</body>
+</html>
