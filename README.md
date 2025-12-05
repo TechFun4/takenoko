@@ -1,30 +1,18 @@
-# RoundUp Wallet - Web3 Acorns for Solana
+# Takenoko Wallet
 
-A browser extension wallet for Solana that automatically rounds up your transactions and invests the difference in USDC, similar to Acorns for traditional finance.
+## Bamboo-fast savings growth - Round-up USDC & SOL, earn yield on Jupiter Lend
+
+A browser extension wallet for Solana that automatically rounds up your transactions and invests the difference in USDC and SOL, similar to Acorns for traditional finance.
 
 ## Features
 
 - **Full Solana Wallet**: Send, receive, and manage SOL and SPL tokens
 - **Automatic Round-Up**: Every transaction rounds up to the nearest dollar, with the difference saved for investing
-- **USDC Vault**: Secure on-chain vault powered by Anchor smart contract
-- **DeFi Integration**: (Coming soon) Auto-invest round-ups into yield-generating protocols
+- **USDC Vault**: Secure on-chain vault powered by Anchor smart contracts
+- **DeFi Integration**: Auto-invest round-ups into yield-generating protocols (Jupiter Lend and Kamino Finance) 
 - **dApp Compatible**: Works with Solana dApps like Phantom wallet
 - **Secure**: BIP39 mnemonic phrases, encrypted storage, password protection
 
-## Project Structure
-
-```
-rug/
-├── programs/
-│   └── round-up-vault/      # Anchor smart contract (Rust)
-├── extension/               # Browser extension
-│   ├── popup/              # React UI
-│   ├── background/         # Background service worker
-│   ├── content/            # Content scripts
-│   └── lib/                # Core wallet logic
-├── tests/                  # Program tests
-└── Anchor.toml
-```
 
 ## Prerequisites
 
@@ -101,7 +89,7 @@ The compiled extension will be in the `dist/` folder.
 
 ### First Time Setup
 
-1. Click the RoundUp extension icon
+1. Click the Takenoko extension icon
 2. Click "Create New Wallet"
 3. **IMPORTANT**: Write down your 12-word recovery phrase
 4. Create a strong password
@@ -192,18 +180,6 @@ npm test
 - **Audit code**: This is alpha software - review before using with real funds
 - **Start with devnet**: Test thoroughly on devnet before mainnet
 
-## Roadmap
-
-- [x] Basic wallet functionality
-- [x] Round-up calculation and monitoring
-- [x] USDC vault smart contract
-- [ ] Auto-invest feature
-- [ ] DeFi yield integration (Marinade, Solend)
-- [ ] Transaction approval UI
-- [ ] Multi-account support
-- [ ] Hardware wallet support
-- [ ] Mobile app
-
 ## Technical Details
 
 ### USDC Addresses
@@ -216,28 +192,15 @@ npm test
 - **Devnet**: `https://api.devnet.solana.com`
 - **Mainnet**: `https://api.mainnet-beta.solana.com`
 
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
-
 ## License
 
 MIT License - see LICENSE file
 
 ## Disclaimer
 
-This is experimental software. Use at your own risk. Not audited. Not financial advice.
+This is experimental software. Use at your own risk. Not audited. Not production ready!!!
 
-## Support
-
-For issues and questions:
-- GitHub Issues: [Your repo URL]
-- Discord: [Your Discord]
-- Twitter: [Your Twitter]
 
 ---
 
-Built with ❤️ for the Solana ecosystem
+Built with ❤️ for the Solana ecosystem and funny Twitter beef about lending protocols
